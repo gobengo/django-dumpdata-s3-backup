@@ -48,9 +48,9 @@ if __name__ == '__main__':
     os.environ['DJANGO_SETTINGS_MODULE'] = SETTINGS_PYPATH
 
     print("Dumping data.")
-    dumped_data = get_dumped_data('kbs_publications')
+    dumped_data = get_dumped_data()
     print("Connecting to AWS.")
-    conn, bucket, key = s3_init(AWS_ACCESS_KEY_ID, AWS_SECRET_KEY, 'kbs_kars', 'dumpdata_backup')
+    conn, bucket, key = s3_init(AWS_ACCESS_KEY_ID, AWS_SECRET_KEY, BUCKET_NAME, KEY_NAME)
 
     import hashlib
     local_md5 = hashlib.md5(dumped_data).hexdigest()
