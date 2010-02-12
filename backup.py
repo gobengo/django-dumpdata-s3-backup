@@ -6,13 +6,13 @@ import StringIO
 
 #SETTINGS
 #S3
-AWS_ACCESS_KEY_ID = ''
-AWS_SECRET_KEY = ''
-BUCKET_NAME = ''
-KEY_NAME = ''
+AWS_ACCESS_KEY_ID = 'AKIAIDCCM2YY4GTCKZOA'
+AWS_SECRET_KEY = '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'
+BUCKET_NAME = 'kbs_kars'
+KEY_NAME = 'datadump_backup'
 #DJANGO
-PROJECT_DIR = ''
-SETTINGS_PYPATH = ''
+PROJECT_DIR = '/var/www/karscode'
+SETTINGS_PYPATH = 'karscode.settings.kars'
 
 def get_dumped_data(*apps, **options):
     from django.core.management import call_command
@@ -48,9 +48,9 @@ if __name__ == '__main__':
     os.environ['DJANGO_SETTINGS_MODULE'] = SETTINGS_PYPATH
 
     print("Dumping data.")
-    dumped_data = get_dumped_data()
+    dumped_data = get_dumped_data('kbs_publications')
     print("Connecting to AWS.")
-    conn, bucket, key = s3_init(AWS_ACCESS_KEY_ID, AWS_SECRET_KEY, BUCKET_NAME, KEY_NAME)
+    conn, bucket, key = s3_init(AWS_ACCESS_KEY_ID, AWS_SECRET_KEY, 'kbs_kars', 'dumpdata_backup')
 
     import hashlib
     local_md5 = hashlib.md5(dumped_data).hexdigest()
